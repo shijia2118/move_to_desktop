@@ -1,6 +1,8 @@
 package com.example.move_to_desktop;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 
@@ -17,9 +19,11 @@ public class MoveToDesktopPlugin implements FlutterPlugin, MethodCallHandler, Ac
 
   private MethodChannel channel;
   private Activity activity;
+  private Context mContext;
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+    mContext = flutterPluginBinding.getApplicationContext();
     channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "move_to_desktop");
     channel.setMethodCallHandler(this);
   }
@@ -29,9 +33,20 @@ public class MoveToDesktopPlugin implements FlutterPlugin, MethodCallHandler, Ac
     if (call.method.equals("move_to_desktop")) {
       boolean moveResult = activity.moveTaskToBack(true);
       result.success(moveResult);
-    } else {
+    } else if (call.method.equals("move_to_front")) {
+      moveTaskToFront();
+      result.success(true);
+    }else {
       result.notImplemented();
     }
+  }
+
+  private void moveTaskToFront() {
+    int taskId = activity.getTaskId();
+    activity.moveTaskToBack(false);
+    activity.finish();
+    ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
+    am.moveTaskToFront(taskId, ActivityManager.MOVE_TASK_WITH_HOME);
   }
 
   @Override

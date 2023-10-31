@@ -5,4 +5,8 @@ class MoveToDesktop {
   Future<bool> moveToDesktop() {
     return MoveToDesktopPlatform.instance.moveToDesktop();
   }
+
+  Future<bool> moveToFront() {
+    return MoveToDesktopPlatform.instance.moveToFront();
+  }
 }

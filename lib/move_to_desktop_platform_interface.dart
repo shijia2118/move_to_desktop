@@ -26,4 +26,9 @@ abstract class MoveToDesktopPlatform extends PlatformInterface {
   Future<bool> moveToDesktop() {
     throw UnimplementedError('moveToDesktop() has not been implemented.');
   }
+
+
+  Future<bool> moveToFront() {
+    throw UnimplementedError('moveToFront() has not been implemented.');
+  }
 }

@@ -14,4 +14,10 @@ class MethodChannelMoveToDesktop extends MoveToDesktopPlatform {
     final result = await methodChannel.invokeMethod<bool>('move_to_desktop');
     return result??false;
   }
+
+  @override
+  Future<bool> moveToFront() async {
+    final result = await methodChannel.invokeMethod<bool>('move_to_front');
+    return result??false;
+  }
 }
