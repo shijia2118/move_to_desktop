@@ -2,7 +2,11 @@ package com.example.move_to_desktop;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 
@@ -42,12 +46,15 @@ public class MoveToDesktopPlugin implements FlutterPlugin, MethodCallHandler, Ac
   }
 
   private void moveTaskToFront() {
-    int taskId = activity.getTaskId();
-    activity.moveTaskToBack(false);
-    activity.finish();
-    ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
-    am.moveTaskToFront(taskId, ActivityManager.MOVE_TASK_WITH_HOME);
+    PackageManager pm = mContext.getPackageManager();
+    Intent intent = pm.getLaunchIntentForPackage(mContext.getPackageName());
+    if (intent != null) {
+      intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+      mContext.startActivity(intent);
+    }
+
   }
+
 
   @Override
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
