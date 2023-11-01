@@ -1,12 +1,10 @@
 package com.example.move_to_desktop;
 
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -52,7 +50,6 @@ public class MoveToDesktopPlugin implements FlutterPlugin, MethodCallHandler, Ac
       intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
       mContext.startActivity(intent);
     }
-
   }
 
 
