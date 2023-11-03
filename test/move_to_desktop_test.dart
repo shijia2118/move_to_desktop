@@ -11,6 +11,11 @@ class MockMoveToDesktopPlatform with MockPlatformInterfaceMixin implements MoveT
   Future<bool> moveToDesktop() {
     throw UnimplementedError();
   }
+
+  @override
+  Future<bool> moveToFront() {
+    throw UnimplementedError();
+  }
 }
 
 void main() {
