@@ -1,6 +1,6 @@
 name: move_to_desktop
-description: 这是一个Flutter插件，用于返回桌面，同时不会关闭APP。支持Android和IOS
-version: 0.0.1
+description: 这是一个Flutter插件，支持前后台切换。支持Android和IOS
+version: 0.0.2
 homepage: https://github.com/shijia2118/move_to_desktop.git
 
 environment:
